@@ -70,6 +70,21 @@
     break-after: avoid;
   }
 
+  /* Pagination: keep each section on one page where it fits, and start Honors, Certifications
+     and Skills together on a new page. Revisit the forced break if Presentations no longer fits
+     on the page before it. */
+  section {
+    break-inside: avoid;
+  }
+
+  section[aria-labelledby="cv-honors"] {
+    break-before: page;
+  }
+
+  section[aria-labelledby="cv-honors"] > h2 {
+    margin-top: 0;
+  }
+
   /* Entries (_includes/cv-entry.html) */
   .cv-entry {
     margin: 0 0 6pt;

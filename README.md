@@ -1,9 +1,10 @@
 # David Amebley: academic website
 
-Personal academic website and teaching portfolio for David Amebley, Ph.D. student in
-Computer Science at The University of Alabama.
+Personal professional website of David Amebley, Ph.D. student in Computer Science at The
+University of Alabama, featuring research, publications, projects, teaching experience, and
+professional background.
 
-**Status:** configured for GitHub Pages at https://davidamebley.github.io but not yet published.
+**Status:** published with GitHub Pages at https://davidamebley.github.io.
 
 ## Template provenance
 

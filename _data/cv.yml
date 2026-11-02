@@ -43,16 +43,23 @@ teaching:
   - title: "IT Teacher"
     org: "Shining Star International School, Kumasi, Ghana"
     dates: "2011–2020"
+    details:
+      - "Taught computing and digital literacy, organizing coding competitions and project-based learning activities."
+      - "Mentored students in foundational programming and problem-solving skills."
 
 industry:
   - title: "Full-Stack Developer"
     org: "Hack Junction, Finland"
     dates: "2023–2025"
     details:
-      - "Web platform development, backend reliability, and product analytics with React, Node.js, and PostHog."
+      - "Developed and maintained Node.js backend services, debugging production issues and improving database schemas and reliability."
+      - "Built React frontend features and implemented PostHog analytics to support usability improvements and data-informed product decisions."
   - title: "Junior Full-Stack Developer"
     org: "Integrify Academy, Finland"
     dates: "2022–2023"
+    details:
+      - "Developed full-stack web applications using TypeScript, React, Node.js, and SQL, with AWS-related deployment workflows."
+      - "Built CI/CD pipelines using Docker and GitHub Actions."
 
 presentations:
   - title: "VLMLeaks: Membership Inference Attacks against Vision-Language Models"
@@ -78,14 +85,14 @@ training:
 # Only skills documented in the CV information supplied for the site
 skills:
   - category: "Programming"
-    items: "Python, JavaScript"
+    items: "Python, JavaScript, TypeScript"
   - category: "Frameworks and libraries"
     items: "React, Node.js, OpenCV"
   - category: "Databases"
-    items: "MySQL, MongoDB"
+    items: "SQL, MySQL, MongoDB"
   - category: "Machine learning"
     items: "Object detection (YOLOv5), vision-language models (BLIP, PaliGemma 2)"
   - category: "Security and privacy"
     items: "Membership inference attacks, black-box model evaluation"
   - category: "Development tools"
-    items: "Git, UML modeling, PostHog, AWS"
+    items: "Git, GitHub Actions, Docker, UML modeling, PostHog, AWS"
