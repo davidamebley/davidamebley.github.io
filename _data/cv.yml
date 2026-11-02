@@ -1,0 +1,91 @@
+# CV page entries (rendered by _includes/cv-entry.html). Publications come from _publications/.
+education:
+  - title: "Ph.D. in Computer Science"
+    org: "The University of Alabama"
+    dates: "2025–present"
+    details:
+      - "Advisor: Dr. Tu Le"
+  - title: "M.Sc. in Computer Science"
+    org: "University of Eastern Finland"
+    dates: "2020–2022"
+  - title: "B.Sc. in Information Technology"
+    org: "Garden City University College, Ghana"
+    dates: "2014–2018"
+
+research:
+  - title: "Graduate Researcher"
+    org: "Human-Centered Computing Lab, The University of Alabama"
+    dates: "2026–present"
+    details:
+      - "Human-centered research on developer decisions and usability barriers in post-quantum cryptography adoption (ongoing)."
+  - title: "Graduate Researcher"
+    org: "Trustworthy AI Lab, The University of Alabama"
+    dates: "2025–2026"
+    details:
+      - "Privacy evaluation and membership inference studies of vision-language models."
+  - title: "Master's research project"
+    org: "University of Eastern Finland"
+    dates: "2022"
+    details:
+      - "Augmented reality prototype for microsurgical skills training."
+
+teaching:
+  - title: "Graduate Teaching Assistant"
+    org: "The University of Alabama"
+    dates: "Spring and Fall 2026"
+    details:
+      - "CS 200: Software Design and Engineering. Assist with course instruction, lead lab sessions, hold office hours, grade coursework, and support students with course concepts."
+  - title: "Teaching Assistant"
+    org: "The University of Alabama"
+    dates: "Fall 2025"
+    details:
+      - "CS 470/570: Computer Algorithms. Grading and instructional support."
+  - title: "IT Teacher"
+    org: "Shining Star International School, Kumasi, Ghana"
+    dates: "2011–2020"
+
+industry:
+  - title: "Full-Stack Developer"
+    org: "Hack Junction, Finland"
+    dates: "2023–2025"
+    details:
+      - "Web platform development, backend reliability, and product analytics with React, Node.js, and PostHog."
+  - title: "Junior Full-Stack Developer"
+    org: "Integrify Academy, Finland"
+    dates: "2022–2023"
+
+presentations:
+  - title: "VLMLeaks: Membership Inference Attacks against Vision-Language Models"
+    org: "Poster presentation, Alabama Higher Education AI Exchange"
+    dates: "October 2025"
+
+honors:
+  - title: "Best Graduating Student"
+    org: "Garden City University College"
+    dates: "2018"
+  - title: "IMPIT Tuition Scholarship"
+    org: "University of Eastern Finland"
+    dates: "2020–2022"
+
+training:
+  - title: "AWS Certified Cloud Practitioner"
+    org: "Amazon Web Services"
+    dates: "Earned 2023"
+  - title: "Responsible Conduct of Research and Human Subjects Research training"
+    org: "CITI Program"
+    dates: "2026"
+
+# Only skills documented in the CV information supplied for the site
+skills:
+  - category: "Programming"
+    items: "Python, JavaScript"
+  - category: "Frameworks and libraries"
+    items: "React, Node.js, OpenCV"
+  - category: "Databases"
+    items: "MySQL, MongoDB"
+  - category: "Machine learning"
+    items: "Object detection (YOLOv5), vision-language models (BLIP, PaliGemma 2)"
+  - category: "Security and privacy"
+    items: "Membership inference attacks, black-box model evaluation"
+  - category: "Development tools"
+    items: "Git, UML modeling, PostHog, AWS"

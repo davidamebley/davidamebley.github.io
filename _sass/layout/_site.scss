@@ -1,0 +1,1273 @@
+/* ==========================================================================
+   SITE-SPECIFIC COMPONENTS
+   Page layout, theme toggle, headshot slot, home page, publications, status
+   notes, teaching cards, video placeholder, contact form and accessibility
+   refinements layered on top of the template styles.
+   ========================================================================== */
+
+// Full-height column: the footer sits at the bottom of short pages and after the
+// content on long ones. The template's 9em bottom padding (room for its fixed
+// footer) is removed, since it left a gap below the footer on short pages.
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding-bottom: 0;
+  background-color: var(--global-bg-color);
+  color: var(--global-text-color);
+}
+
+#main {
+  width: 100%;
+}
+
+// Keep focused elements and in-page link targets clear of the fixed masthead (WCAG 2.4.11)
+html {
+  scroll-padding-top: calc(var(--masthead-height, #{$masthead-height}) + 1rem);
+}
+
+// No fade-in on every page load; it reads as a flash when moving between pages
+.masthead,
+#main,
+.page__footer {
+  animation: none;
+}
+
+::selection {
+  background: var(--global-selection-bg-color);
+  color: var(--global-selection-text-color);
+}
+
+// The template pins the footer to the viewport on desktop, which hides content and
+// focused links behind it. Keep it in the document flow, pushed to the bottom of short pages.
+.page__footer {
+  position: relative;
+  bottom: auto;
+  float: none;
+  margin-top: auto;
+}
+
+.page__footer footer {
+  padding-top: 1em;
+}
+
+// The Sitemap link sits on its own line, so it needs a 24px target (WCAG 2.5.8)
+.page__footer-copyright > a:last-child {
+  display: inline-block;
+  min-height: 24px;
+  line-height: 24px;
+}
+
+/*
+   Keyboard focus and skip link
+   ========================================================================== */
+
+a:focus:not(:focus-visible) {
+  outline: none;
+}
+
+a:focus-visible,
+button:focus-visible,
+.greedy-nav button:focus-visible {
+  outline: 3px solid var(--global-base-color);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.skip-to-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 0.75em 1em;
+  background: var(--global-base-color);
+  color: var(--global-on-accent-color);
+  font-family: $sans-serif;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-120%);
+
+  &:focus,
+  &:focus-visible {
+    transform: translateY(0);
+    color: var(--global-on-accent-color);
+    outline: 3px solid var(--global-text-color);
+    outline-offset: 0;
+  }
+}
+
+/*
+   Masthead and theme toggle
+   ========================================================================== */
+
+// The theme toggle sits beside the navigation, so the overflow menu only measures the nav
+.masthead__menu {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  #site-nav {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+}
+
+.theme-toggle {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--global-border-color);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--global-text-color);
+  font-size: 1rem;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--global-base-color);
+    color: var(--global-base-color);
+  }
+
+  // Follow the round shape (the shared focus rule uses a small radius)
+  &:focus-visible {
+    border-radius: 50%;
+  }
+}
+
+// Show the icon for the available action: a sun in the dark theme, a moon in the light theme.
+// Scoped to the button so these rules outrank Font Awesome's `.fas` display, which loads
+// after this stylesheet.
+.theme-toggle .theme-toggle__icon--to-dark,
+html[data-theme="light"] .theme-toggle .theme-toggle__icon--to-light {
+  display: none;
+}
+
+html[data-theme="light"] .theme-toggle .theme-toggle__icon--to-dark {
+  display: inline-block;
+}
+
+.masthead__menu-item--lg a {
+  font-family: $header-font-family;
+  color: var(--global-base-color);
+  letter-spacing: 0.01em;
+}
+
+// The template disables clicks on the selected item; keep section links usable
+// (e.g. "Teaching" while on /teaching/philosophy/) and mark them in the accent color.
+.masthead__menu-item.selected a,
+.masthead__menu-item.selected a:hover {
+  pointer-events: auto;
+  cursor: pointer;
+  color: var(--global-base-color);
+  border-bottom-color: var(--global-base-color);
+}
+
+// The menu button follows the links in the markup (for focus order) but sits at the top right
+.greedy-nav > button {
+  top: 0;
+  min-width: 2.75rem;
+}
+
+/*
+   Headings and body text
+   ========================================================================== */
+
+.page__content {
+  line-height: 1.65;
+
+  h2 {
+    margin-top: 2em;
+    padding-bottom: 0.35em;
+    border-bottom: 1px solid var(--global-border-color);
+    font-size: $type-size-4;
+  }
+}
+
+.page__title {
+  font-family: $header-font-family;
+  line-height: 1.2;
+}
+
+/*
+   Headshot slot (see _includes/headshot.html)
+   ========================================================================== */
+
+// Below the desktop breakpoint the template lays the profile out as table cells, which
+// ignores the avatar width; use a flex row with a fixed 64px headshot instead.
+.sidebar [itemtype$="Person"] {
+  @media screen and (max-width: #{$large - 1px}) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 0;
+
+    .author__urls-wrapper {
+      flex-basis: 100%;
+    }
+  }
+}
+
+.author__avatar {
+  container-type: inline-size;
+  flex: 0 0 64px;
+  width: 64px;
+
+  @include breakpoint($large) {
+    display: block;
+    width: auto;
+  }
+}
+
+.headshot {
+  display: block;
+  width: 100%;
+  max-width: 175px;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.headshot--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--global-base-color);
+  background: var(--global-surface-color);
+  color: var(--global-base-color);
+  font-family: $header-font-family;
+  font-weight: 700;
+  font-size: 1.4rem;
+  font-size: 34cqi;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  user-select: none;
+}
+
+// The template fixes the sidebar to the viewport on wide screens, where it can sit over the
+// footer on short pages. Keep it in the flow and let it stick below the masthead instead.
+@media screen and (min-width: $sidebar-screen-min-width) {
+  .sidebar.sticky {
+    position: sticky;
+    top: calc(var(--masthead-height, #{$masthead-height}) + 1.5rem);
+    bottom: auto;
+    max-height: calc(100vh - var(--masthead-height, #{$masthead-height}) - 3rem);
+    padding-top: 0;
+  }
+}
+
+@include breakpoint($large) {
+  .sidebar .headshot {
+    max-width: 8.5rem;
+  }
+}
+
+// Profile links: separated from the text above; the mobile pop-up arrow follows the theme
+.sidebar .author__urls {
+  @include breakpoint($large) {
+    margin-top: 0.75em;
+  }
+
+  &:after {
+    border-color: var(--global-bg-color) transparent;
+  }
+}
+
+.sidebar .author__name {
+  margin: 0;
+  font-family: $header-font-family;
+  font-size: $type-size-5;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.sidebar .author__bio,
+.sidebar .author__employer {
+  margin: 0.35em 0 0;
+  color: var(--global-text-color-light);
+}
+
+/*
+   Status notes ("Draft", "Coming soon")
+   ========================================================================== */
+
+.status-note {
+  margin: 1.5em 0;
+  padding: 0.9em 1.1em;
+  border-left: 4px solid var(--global-base-color);
+  border-radius: 0 $border-radius $border-radius 0;
+  background: var(--global-surface-color);
+  font-size: $type-size-6;
+
+  p {
+    margin: 0;
+    font-size: inherit;
+  }
+
+  p + p {
+    margin-top: 0.5em;
+  }
+}
+
+.status-label {
+  display: inline-block;
+  margin-bottom: 0.4em;
+  padding: 0.1em 0.6em;
+  border: 1px solid var(--global-base-color);
+  border-radius: 999px;
+  color: var(--global-base-color);
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/*
+   Card grid (teaching overview, home page sections)
+   ========================================================================== */
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1rem;
+  margin: 1.5em 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    margin: 0;
+  }
+}
+
+// Exactly three cards (research themes): one column when narrow, three equal columns once the
+// content area is wide enough, never a two-plus-one layout. Sized by the content area, which
+// differs between the full-width home page and pages with the sidebar.
+.card-grid-container {
+  container-type: inline-size;
+}
+
+.card-grid--three {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.card-grid--three .card .card__text {
+  font-size: 0.85em;
+}
+
+@container (min-width: 38rem) {
+  .card-grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.page__content .card,
+.page__content .card:hover {
+  text-decoration: none;
+}
+
+.card {
+  display: block;
+  height: 100%;
+  padding: 1.1em 1.2em;
+  border: 1px solid var(--global-border-color);
+  border-radius: $border-radius;
+  background: var(--global-surface-color);
+  color: var(--global-text-color);
+  text-decoration: none;
+  transition: border-color 0.15s ease-in-out;
+
+  &:hover {
+    border-color: var(--global-base-color);
+  }
+
+  &:visited {
+    color: var(--global-text-color);
+  }
+}
+
+// Cards that are not links (e.g. research themes) keep their border on hover
+.card--static:hover {
+  border-color: var(--global-border-color);
+}
+
+.card__title {
+  display: block;
+  margin: 0 0 0.3em;
+  line-height: 1.3;
+  color: var(--global-base-color);
+  font-family: $header-font-family;
+  font-size: 1.1em;
+  font-weight: 600;
+}
+
+.card__text {
+  display: block;
+  font-size: $type-size-6;
+  line-height: 1.5;
+}
+
+// Short note on a card whose section is not complete yet (e.g. "In preparation")
+.card__note {
+  display: block;
+  margin-top: 0.7em;
+  color: var(--global-text-color-light);
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-style: italic;
+}
+
+/*
+   Section sub-navigation (teaching portfolio)
+   ========================================================================== */
+
+.section-nav {
+  margin: 0 0 1.5em;
+  padding-bottom: 1em;
+  border-bottom: 1px solid var(--global-border-color);
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5em;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.35em 0.85em;
+    border: 1px solid var(--global-border-color);
+    border-radius: 999px;
+    color: var(--global-text-color);
+    font-family: $sans-serif;
+    font-size: $type-size-6;
+    text-decoration: none;
+
+    &:hover {
+      border-color: var(--global-base-color);
+      color: var(--global-base-color);
+    }
+
+    &[aria-current="page"] {
+      border-color: var(--global-base-color);
+      background: var(--global-base-color);
+      color: var(--global-on-accent-color);
+    }
+  }
+}
+
+/*
+   Teaching experience timeline and portfolio activity index
+   ========================================================================== */
+
+.timeline,
+.activity-list {
+  margin: 0 0 1.5em;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__item {
+  position: relative;
+  margin: 0;
+  padding: 0 0 1.25em 1.5em;
+  border-left: 2px solid var(--global-border-color);
+
+  // Marker on the line; decorative, the order is carried by the list
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0.45em;
+    left: calc(-0.4em - 1px);
+    width: 0.8em;
+    height: 0.8em;
+    border-radius: 50%;
+    background: var(--global-base-color);
+  }
+
+  &:last-child {
+    padding-bottom: 0.25em;
+  }
+
+  p {
+    margin: 0.5em 0 0;
+  }
+}
+
+.page__content .timeline__title,
+.page__content .activity__title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.page__content .timeline__meta,
+.page__content .activity__meta {
+  margin: 0.25em 0 0;
+  color: var(--global-text-color-light);
+  font-family: $sans-serif;
+  font-size: 0.85em;
+}
+
+.activity {
+  margin: 0;
+  padding: 1em 0;
+  border-top: 1px solid var(--global-border-color);
+
+  &:last-child {
+    border-bottom: 1px solid var(--global-border-color);
+  }
+}
+
+.page__content .activity__purpose {
+  margin: 0.4em 0 0;
+  font-size: 0.95em;
+}
+
+.page__content .activity__reflection,
+.page__content .activity__link {
+  margin: 0.5em 0 0;
+  font-size: 0.95em;
+}
+
+.activity__label {
+  font-weight: 600;
+}
+
+// In-page list of activities: compact, wrapping links
+.activity-index ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 1.25em;
+  margin: 0 0 1em;
+  padding: 0;
+  list-style: none;
+  font-family: $sans-serif;
+  font-size: 0.85em;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.2em 0;
+  }
+}
+
+/*
+   Teaching demonstration feedback
+   ========================================================================== */
+
+// Short quotation with its source; the theme's figure is a flex row
+.feedback-quote {
+  display: block;
+  margin: 1em 0 1.25em;
+
+  blockquote {
+    margin: 0;
+  }
+
+  blockquote p {
+    margin: 0;
+  }
+
+  figcaption {
+    margin: 0.35em 0 0 1.25em;
+    color: var(--global-text-color-light);
+  }
+}
+
+/*
+   Teaching demonstration video placeholder (16:9)
+   ========================================================================== */
+
+.video-slot {
+  margin: 1.5em 0;
+}
+
+.video-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  padding: 1.5em;
+  border: 2px dashed var(--global-dark-border-color);
+  border-radius: $border-radius;
+  background: var(--global-surface-color);
+  text-align: center;
+
+  .fa-video {
+    margin-bottom: 0.4em;
+    color: var(--global-base-color);
+    font-size: 2rem;
+  }
+}
+
+.video-placeholder__title {
+  margin: 0;
+  font-family: $header-font-family;
+  font-size: $type-size-4;
+  font-weight: 700;
+}
+
+.video-placeholder__text {
+  max-width: 32em;
+  margin: 0.5em 0 0;
+  color: var(--global-text-color-light);
+  font-size: $type-size-6;
+}
+
+/*
+   Buttons (text links styled as actions)
+   ========================================================================== */
+
+.button-link {
+  display: inline-block;
+  padding: 0.55em 1.1em;
+  border: 1px solid var(--global-dark-border-color);
+  border-radius: $border-radius;
+  color: var(--global-text-color);
+  font-family: $sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+
+  &:hover,
+  &:visited {
+    color: var(--global-text-color);
+  }
+
+  &:hover {
+    border-color: var(--global-base-color);
+  }
+}
+
+.button-link--primary,
+.button-link--primary:visited {
+  border-color: var(--global-base-color);
+  background: var(--global-base-color);
+  color: var(--global-on-accent-color);
+}
+
+.button-link--primary:hover {
+  border-color: var(--global-accent-strong-color);
+  background: var(--global-accent-strong-color);
+  color: var(--global-on-accent-color);
+}
+
+/*
+   Home page (_layouts/home.html, no sidebar)
+   ========================================================================== */
+
+#main.home {
+  max-width: 58rem;
+  margin-top: 1.5em;
+  margin-bottom: 3em;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 10.5rem 1fr;
+  gap: 1.5rem 2.5rem;
+  align-items: center;
+  padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--global-border-color);
+
+  @media screen and (max-width: #{$small - 1px}) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero__photo {
+  container-type: inline-size;
+  width: 100%;
+
+  @media screen and (max-width: #{$small - 1px}) {
+    width: 6.5rem;
+  }
+}
+
+.hero__name {
+  margin: 0;
+  font-size: $type-size-1;
+  line-height: 1.1;
+}
+
+.hero__role {
+  margin: 0.5em 0 0;
+  font-size: $type-size-4;
+  line-height: 1.4;
+}
+
+.hero__institution {
+  display: block;
+  color: var(--global-text-color-light);
+  font-size: 0.85em;
+}
+
+.hero__bio {
+  max-width: 40em;
+  margin: 1.1em 0 0;
+  line-height: 1.65;
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1.5em 0 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0;
+  }
+}
+
+.home-section {
+  padding-top: 2.5rem;
+
+  > p {
+    max-width: 44em;
+    line-height: 1.65;
+  }
+}
+
+.home-section__header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-bottom: 0.75rem;
+
+  h2 {
+    margin: 0;
+    font-size: $type-size-3;
+  }
+}
+
+
+.home-section__more {
+  display: inline-block;
+  padding: 0.35em 0;
+  font-family: $sans-serif;
+  font-size: $type-size-6;
+  font-weight: 600;
+}
+
+/*
+   Publications (_includes/publication-entry.html)
+   ========================================================================== */
+
+.pub-list {
+  display: grid;
+  gap: 1rem;
+  margin: 1em 0 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    margin: 0;
+  }
+}
+
+.pub {
+  padding: 1.1em 1.25em;
+  border: 1px solid var(--global-border-color);
+  border-radius: $border-radius;
+  background: var(--global-surface-color);
+}
+
+.pub--highlight {
+  border-left: 4px solid var(--global-base-color);
+}
+
+.pub__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+  margin: 0 0 0.6em;
+}
+
+// Status pills, also used for research project status
+.pub__status,
+.pub__tag {
+  display: inline-block;
+  padding: 0.15em 0.65em;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  font-family: $sans-serif;
+  font-size: $type-size-7;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.pub__status {
+  background: var(--global-accent-soft-color);
+  color: var(--global-accent-strong-color);
+}
+
+.pub__status--submitted,
+.pub__status--thesis,
+.pub__status--in-progress,
+.pub__tag {
+  border-color: var(--global-dark-border-color);
+  background: transparent;
+  color: var(--global-text-color-light);
+}
+
+.pub__title {
+  margin: 0;
+  font-family: $header-font-family;
+  font-size: 1.1em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.pub__authors,
+.pub__venue {
+  margin: 0.4em 0 0;
+  font-size: 0.9em;
+  line-height: 1.5;
+}
+
+.pub__authors strong {
+  color: var(--global-text-color);
+}
+
+.pub__authors,
+.pub__venue {
+  color: var(--global-text-color-light);
+}
+
+.pub__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em 1.25em;
+  margin: 0.7em 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: $sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.25em 0;
+  }
+}
+
+.page__content {
+  .pub__title {
+    margin: 0;
+  }
+
+  .pub__authors,
+  .pub__venue {
+    font-size: 0.9em;
+  }
+
+  .pub__links {
+    font-size: 0.85em;
+  }
+
+  .pub-list > li,
+  .pub__links li {
+    margin: 0;
+  }
+}
+
+/*
+   Projects (_includes/project-entry.html)
+   ========================================================================== */
+
+.project-list {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    margin: 0;
+  }
+}
+
+.project {
+  padding: 1.1em 1.25em;
+  border: 1px solid var(--global-border-color);
+  border-radius: $border-radius;
+  background: var(--global-surface-color);
+}
+
+.page__content .project__title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 1.15em;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.page__content .project__meta {
+  margin: 0.3em 0 0;
+  color: var(--global-text-color-light);
+  font-size: 0.85em;
+}
+
+.page__content .project__summary {
+  margin: 0.6em 0 0;
+}
+
+// Label and value pairs (project details, CV skills)
+.project__details,
+.cv-skills {
+  margin: 0.6em 0 0;
+  font-size: 0.9em;
+
+  > div {
+    margin: 0.2em 0 0;
+  }
+
+  dt {
+    display: inline;
+    font-weight: 600;
+
+    &::after {
+      content: ":";
+    }
+  }
+
+  dd {
+    display: inline;
+    margin: 0 0 0 0.3em;
+    color: var(--global-text-color-light);
+    font-family: inherit;
+    font-size: inherit;
+  }
+}
+
+/*
+   CV citations (_includes/publication-citation.html)
+   ========================================================================== */
+
+.page__content .cv-subheading {
+  margin: 1.25em 0 0.4em;
+  color: var(--global-text-color-light);
+  font-family: $sans-serif;
+  font-size: 0.85em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.citation-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.page__content .citation-list > li {
+  margin: 0 0 0.6em;
+}
+
+// Hanging indent, as in a printed reference list
+.page__content .citation {
+  margin: 0;
+  padding-left: 1.5em;
+  text-indent: -1.5em;
+  font-size: 0.9em;
+  line-height: 1.55;
+}
+
+.citation__links a {
+  margin-left: 0.35em;
+  font-family: $sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+}
+
+/*
+   CV page: PDF links above the profile links
+   ========================================================================== */
+
+.cv-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 1em;
+  padding: 0;
+  list-style: none;
+}
+
+.page__content .cv-actions li {
+  margin: 0;
+}
+
+// Match the home page buttons; the template underlines every link in page content
+.page__content .cv-actions a,
+.page__content .cv-actions a:hover {
+  text-decoration: none;
+}
+
+/*
+   CV and Leadership & Service entries (_includes/cv-entry.html)
+   ========================================================================== */
+
+.cv-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em 1.25em;
+  margin: 0 0 0.5em;
+  padding: 0;
+  list-style: none;
+  font-family: $sans-serif;
+  font-size: 0.9em;
+  font-weight: 600;
+
+  li {
+    margin: 0;
+  }
+
+  a {
+    display: inline-block;
+    padding: 0.25em 0;
+  }
+}
+
+.cv-entry {
+  margin-top: 1.1em;
+
+  p,
+  ul {
+    margin: 0.25em 0 0;
+  }
+}
+
+.cv-entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
+.page__content .cv-entry__title {
+  margin: 0;
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.page__content .cv-entry__dates {
+  margin: 0;
+  color: var(--global-text-color-light);
+  font-family: $sans-serif;
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+.page__content .cv-entry__org {
+  color: var(--global-text-color-light);
+  font-size: 0.9em;
+}
+
+.page__content .cv-entry__details {
+  padding-left: 1.2em;
+  font-size: 0.9em;
+
+  li {
+    margin: 0.15em 0 0;
+  }
+}
+
+/*
+   Research page
+   ========================================================================== */
+
+.research-item {
+  margin-top: 1.25em;
+
+  h3 {
+    margin: 0 0 0.35em;
+  }
+
+  .pub__tags {
+    margin-bottom: 0.4em;
+  }
+}
+
+/*
+   Contact page (_pages/contact.md, _includes/contact-form.html)
+   ========================================================================== */
+
+.contact-form {
+  max-width: 36rem;
+  margin: 1em 0 0;
+  font-family: $sans-serif;
+
+  // The template's form styles use a fixed white field background; follow the theme instead
+  label {
+    margin-bottom: 0.35em;
+    font-weight: 600;
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    min-height: 2.75rem;
+    margin: 0;
+    padding: 0.55em 0.75em;
+    border: 1px solid var(--global-input-border-color);
+    border-radius: $border-radius;
+    background-color: var(--global-surface-color);
+    color: var(--global-text-color);
+    box-shadow: none;
+    font-size: 1rem;
+    line-height: 1.5;
+    // When focus moves to a field, keep its label in view below the fixed masthead too
+    scroll-margin-top: 2.5em;
+
+    &:hover {
+      border-color: var(--global-base-color);
+    }
+
+    &:focus-visible {
+      outline: 3px solid var(--global-base-color);
+      outline-offset: 2px;
+    }
+
+    // Thicker border as well as the color, so the state does not rely on color alone
+    &[aria-invalid="true"] {
+      border: 2px solid var(--global-error-color);
+    }
+  }
+
+  textarea {
+    min-height: 10rem;
+  }
+
+  [hidden] {
+    display: none;
+  }
+}
+
+.page__content .contact-form__note,
+.page__content .contact-form__privacy {
+  margin: 0 0 1em;
+  color: var(--global-text-color-light);
+  font-size: $type-size-6;
+}
+
+.page__content .contact-form__privacy {
+  margin: 1.25em 0 0;
+}
+
+.contact-form__field {
+  margin: 0 0 1.25em;
+}
+
+.page__content .contact-form__error {
+  margin: 0.35em 0 0;
+  color: var(--global-error-color);
+  font-size: $type-size-6;
+  font-weight: 600;
+}
+
+// Spam trap read by Formspree; never shown or announced
+.contact-form__trap {
+  display: none;
+}
+
+.contact-form__submit {
+  min-height: 2.75rem;
+  padding: 0.55em 1.4em;
+  border: 1px solid var(--global-base-color);
+  border-radius: $border-radius;
+  background: var(--global-base-color);
+  color: var(--global-on-accent-color);
+  font-family: $sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--global-accent-strong-color);
+    background: var(--global-accent-strong-color);
+  }
+
+  &[aria-disabled="true"] {
+    cursor: progress;
+  }
+}
+
+.page__content .contact-form__status {
+  margin: 1em 0 0;
+  font-weight: 600;
+}
+
+.page__content .contact-form__status--error {
+  color: var(--global-error-color);
+}
+
+.contact-links {
+  margin: 0.75em 0 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-block;
+    padding: 0.25em 0;
+  }
+}
+
+.page__content .contact-links li {
+  margin: 0 0 0.35em;
+}
+
+.contact-links__label {
+  display: inline-block;
+  min-width: 5.5em;
+  font-weight: 600;
+}
+
+/*
+   Reduced motion
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

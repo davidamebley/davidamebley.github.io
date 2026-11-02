@@ -1,0 +1,35 @@
+/* ==========================================================================
+    SLATE THEME - DARK VERSION (default)
+    Applied on :root so the site is dark for first-time visitors, regardless of
+    the operating system preference, and also when JavaScript is unavailable.
+    ========================================================================== */
+
+/* Dark theme for the site */
+:root,
+html[data-theme="dark"] {
+    color-scheme                        : dark;
+    --global-base-color                 : #93c5fd;
+    --global-accent-strong-color        : #bfdbfe;
+    --global-accent-soft-color          : #1e293b;
+    --global-on-accent-color            : #111827;
+    --global-bg-color                   : #111827;
+    --global-surface-color              : #1f2937;
+    --global-footer-bg-color            : #1f2937;
+    --global-border-color               : #374151;
+    --global-dark-border-color          : #4b5563;
+    --global-input-border-color         : #94a3b8; // form field borders, at least 3:1 on the page
+    --global-code-background-color      : #1f2937;
+    --global-code-text-color            : #e5e7eb;
+    --global-fig-caption-color          : #cbd5e1;
+    --global-link-color                 : #93c5fd;
+    --global-link-color-hover           : #bfdbfe;
+    --global-link-color-visited         : #93c5fd;
+    --global-masthead-link-color        : #f3f4f6;
+    --global-masthead-link-color-hover  : #93c5fd;
+    --global-text-color                 : #f3f4f6;
+    --global-text-color-light           : #cbd5e1;
+    --global-thead-color                : #1f2937;
+    --global-selection-bg-color         : #1e3a8a;
+    --global-selection-text-color       : #f3f4f6;
+    --global-error-color                : #fca5a5; // form validation messages
+}

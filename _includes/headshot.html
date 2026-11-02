@@ -1,0 +1,21 @@
+{% comment %}
+  Headshot slot. The photo is configured in one place: `author.avatar` in _config.yml.
+  - Blank avatar: renders a typographic initials placeholder (`author.initials`).
+  - A file name (e.g. "headshot.jpg") is loaded from /images/; a full URL is used as-is.
+  The image is cropped to a circle with object-fit, so any aspect ratio is safe;
+  `author.avatar_position` controls which part of the photo stays in frame.
+  Usage: {% include headshot.html author=author %}
+{% endcomment %}
+{% include base_path %}
+{% assign headshot_author = include.author | default: site.author %}
+
+{% if headshot_author.avatar and headshot_author.avatar != "" %}
+  {% if headshot_author.avatar contains "://" %}
+    {% assign headshot_src = headshot_author.avatar %}
+  {% else %}
+    {% assign headshot_src = headshot_author.avatar | prepend: "/images/" | prepend: base_path %}
+  {% endif %}
+  <img class="headshot" src="{{ headshot_src }}" alt="{{ headshot_author.avatar_alt | default: headshot_author.name }}" width="400" height="400" style="object-position: {{ headshot_author.avatar_position | default: '50% 50%' }};" itemprop="image" fetchpriority="high" />
+{% else %}
+  <span class="headshot headshot--placeholder" aria-hidden="true">{{ headshot_author.initials | default: "" }}</span>
+{% endif %}

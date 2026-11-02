@@ -1,0 +1,12 @@
+{%- comment -%}
+  Venue and status sentence for a publication, e.g. "Accepted at IEEE CogMI 2026."
+  Usage: {% include publication-venue.html pub=pub %}; add citation=true to name the thesis type,
+  which the publication cards show as a status label instead.
+{%- endcomment -%}
+{%- assign pub = include.pub -%}
+{%- case pub.status -%}
+  {%- when "accepted" -%}Accepted at <em>{{ pub.venue }}</em>.
+  {%- when "submitted" -%}Submitted to <em>{{ pub.venue }}</em>.
+  {%- when "thesis" -%}{% if include.citation %}Master's thesis, {% endif %}{{ pub.venue }}, {{ pub.year }}.
+  {%- else -%}<em>{{ pub.venue }}</em>{% if pub.pages %}, pp. {{ pub.pages }}{% endif %}.
+{%- endcase -%}

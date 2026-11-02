@@ -1,0 +1,19 @@
+{% comment %}
+  One CV-style entry (education, experience, honors, service).
+  Usage: {% include cv-entry.html entry=entry %}
+  Fields: title, org, dates, details (list). `level` sets the heading level (default 3).
+{% endcomment %}
+{% assign entry = include.entry %}
+{% assign entry_level = include.level | default: 3 %}
+<div class="cv-entry">
+  <div class="cv-entry__head">
+    <h{{ entry_level }} class="cv-entry__title">{{ entry.title }}</h{{ entry_level }}>
+    {% if entry.dates %}<p class="cv-entry__dates">{{ entry.dates }}</p>{% endif %}
+  </div>
+  {% if entry.org %}<p class="cv-entry__org">{{ entry.org }}</p>{% endif %}
+  {% if entry.details %}
+  <ul class="cv-entry__details">
+    {% for detail in entry.details %}<li>{{ detail }}</li>{% endfor %}
+  </ul>
+  {% endif %}
+</div>

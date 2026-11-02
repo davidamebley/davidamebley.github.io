@@ -1,0 +1,32 @@
+{% comment %}
+  One project card, rendered from an entry in _data/projects.yml.
+  Usage: {% include project-entry.html project=project %}
+  When `publication` names a _publications/ key, links to its record and its own links are shown.
+{% endcomment %}
+{% include base_path %}
+{% assign project = include.project %}
+{% assign project_pub = nil %}
+{% if project.publication %}
+  {% assign project_pub = site.publications | where: "key", project.publication | first %}
+{% endif %}
+<article class="project">
+  <p class="pub__tags"><span class="pub__tag">{{ project.category }}</span></p>
+  <h2 class="project__title">{{ project.title }}</h2>
+  <p class="project__meta">{{ project.context }}<span aria-hidden="true"> · </span><span class="visually-hidden">, </span>{{ project.period }}</p>
+  <p class="project__summary">{{ project.summary }}</p>
+  {% if project.details %}
+  <dl class="project__details">
+    {% for detail in project.details %}
+    <div><dt>{{ detail.label }}</dt><dd>{{ detail.text }}</dd></div>
+    {% endfor %}
+  </dl>
+  {% endif %}
+  {% if project_pub %}
+  <ul class="pub__links">
+    <li><a href="{{ base_path }}/publications/#{{ project_pub.key }}">{% if project_pub.status == "thesis" %}Thesis record{% else %}Publication record{% endif %}<span class="visually-hidden">: {{ project_pub.title }}</span></a></li>
+    {% for link in project_pub.links %}
+    <li><a href="{{ link.url }}">{{ link.label }}<span class="visually-hidden">: {{ project_pub.title }}</span></a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</article>

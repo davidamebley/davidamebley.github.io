@@ -1,0 +1,59 @@
+# The following is the order of the links in the header of the website.
+#
+# Changing the order here will adjust the order and you can also add additional
+# links. Removing a link prevents it from showing in the header, but does not
+# prevent it from being included in the site.
+
+main:
+  - title: "Home"
+    url: /
+
+  - title: "Research"
+    url: /research/
+
+  - title: "Publications"
+    url: /publications/
+
+  - title: "Projects"
+    url: /projects/
+
+  - title: "Teaching"
+    url: /teaching/
+
+  - title: "Leadership & Service"
+    url: /leadership-service/
+
+  - title: "CV"
+    url: /cv/
+
+  - title: "Contact"
+    url: /contact/
+
+# Teaching sections, used by the /teaching/ overview cards (`title`, `description`) and the
+# teaching sub-navigation (_includes/teaching-nav.html, `nav_title`). `note` is shown on the card
+# for a section whose material is not available yet; remove it once the page is complete.
+teaching:
+  - title: "Teaching Philosophy"
+    nav_title: "Philosophy"
+    url: /teaching/philosophy/
+    description: "What I believe about how students learn computing, and how that shapes my teaching."
+
+  - title: "Teaching Experience"
+    nav_title: "Experience"
+    url: /teaching/experience/
+    description: "Graduate Teaching Assistant at The University of Alabama, supporting course instruction, student learning, and assessment. Previously taught information technology in Ghana."
+
+  - title: "Teaching & Learning Reflections"
+    nav_title: "Reflections"
+    url: /teaching/portfolio/
+    description: "Reflections on teaching approaches, student learning, and instructional practice."
+
+  - title: "Teaching Demonstration & Feedback"
+    nav_title: "Demonstration"
+    url: /teaching/demonstration/
+    description: "A teaching demonstration with instructor and peer feedback."
+
+  - title: "Professional Development"
+    nav_title: "Development"
+    url: /teaching/development/
+    description: "The UA AI Experience program and responsible AI use in teaching."

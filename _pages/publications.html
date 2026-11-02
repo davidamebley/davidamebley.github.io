@@ -1,0 +1,31 @@
+---
+layout: archive
+title: "Publications"
+permalink: /publications/
+author_profile: true
+---
+
+{% include base_path %}
+
+{% if site.publications.size == 0 %}
+  {% include status-note.html label="Coming soon" text="Publications will be listed here after review." %}
+{% endif %}
+
+{% if site.author.googlescholar %}
+  <div class="wordwrap">You can also find my articles on <a href="{{site.author.googlescholar}}">my Google Scholar profile</a>.</div>
+{% endif %}
+
+{% assign publications = site.publications | sort: "order" %}
+{% for category in site.publication_category %}
+  {% assign category_pubs = publications | where: "category", category[0] %}
+  {% if category_pubs.size > 0 %}
+  <section aria-labelledby="pubs-{{ category[0] }}">
+    <h2 id="pubs-{{ category[0] }}">{{ category[1].title }}</h2>
+    <ul class="pub-list">
+      {% for pub in category_pubs %}
+      <li>{% include publication-entry.html pub=pub anchor=true %}</li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endif %}
+{% endfor %}

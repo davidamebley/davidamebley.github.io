@@ -1,0 +1,8 @@
+{%- comment -%}
+  Author list for a publication ("A and B", or "A, B, and C"), with the site author's name in bold.
+  Usage: {% include publication-authors.html pub=pub %}
+{%- endcomment -%}
+{%- for name in include.pub.authors -%}
+  {%- if forloop.last and forloop.length > 1 -%}{%- if forloop.length > 2 -%}, {% else %} {% endif -%}and {% elsif forloop.first == false -%}, {% endif -%}
+  {%- if name == site.author.name -%}<strong>{{ name }}</strong>{%- else -%}{{ name }}{%- endif -%}
+{%- endfor -%}

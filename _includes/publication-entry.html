@@ -1,0 +1,34 @@
+{% comment %}
+  One publication, rendered from a document in the _publications collection.
+  Usage: {% include publication-entry.html pub=pub %}
+  Add anchor=true where each entry appears once on a page (e.g. /publications/#woot2026).
+  Front matter used: title, authors (list; the site author's name is bold), status
+  (published | accepted | submitted | thesis), venue, pages, year, first_author,
+  highlight, links (list of label/url).
+{% endcomment %}
+{% assign pub = include.pub %}
+{% case pub.status %}
+  {% when "published" %}{% assign pub_status = "Published" %}
+  {% when "accepted" %}{% assign pub_status = "Accepted" %}
+  {% when "submitted" %}{% assign pub_status = "Submitted" %}
+  {% when "thesis" %}{% assign pub_status = "Master's thesis" %}
+  {% else %}{% assign pub_status = "" %}
+{% endcase %}
+<article class="pub{% if pub.highlight %} pub--highlight{% endif %}"{% if include.anchor and pub.key %} id="{{ pub.key }}"{% endif %}>
+  {% if pub_status != "" or pub.first_author %}
+  <p class="pub__tags">
+    {% if pub_status != "" %}<span class="pub__status pub__status--{{ pub.status }}">{{ pub_status }}</span>{% endif %}
+    {% if pub.first_author %}<span class="pub__tag">First author</span>{% endif %}
+  </p>
+  {% endif %}
+  <h3 class="pub__title">{{ pub.title }}</h3>
+  <p class="pub__authors">{% include publication-authors.html pub=pub %}</p>
+  <p class="pub__venue">{% include publication-venue.html pub=pub %}</p>
+  {% if pub.links %}
+  <ul class="pub__links">
+    {% for link in pub.links %}
+    <li><a href="{{ link.url }}">{{ link.label }}<span class="visually-hidden">: {{ pub.title }}</span></a></li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+</article>

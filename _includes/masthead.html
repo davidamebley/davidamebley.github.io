@@ -1,0 +1,37 @@
+{% include base_path %}
+<a class="skip-to-content" href="#main">Skip to main content</a>
+<header class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav" aria-label="Main">
+        <ul class="visible-links">
+          <li class="masthead__menu-item masthead__menu-item--lg persist">
+            <a href="{{ base_path }}/">{{ site.title }}</a>
+          </li>
+          {% for link in site.data.navigation.main %}
+            {% if link.url contains 'http' %}
+              {% assign domain = '' %}
+            {% else %}
+              {% assign domain = base_path %}
+            {% endif %}
+            {% assign current = '' %}
+            {% if page.url == link.url or link.url == '/' and page.url == '/index.html' %}
+              {% assign current = 'page' %}
+            {% elsif link.url != '/' and page.url contains link.url %}
+              {% assign current = 'true' %}
+            {% endif %}
+            <li class="masthead__menu-item{% if current != '' %} selected{% endif %}">
+              <a href="{{ domain }}{{ link.url }}"{% if current != '' %} aria-current="{{ current }}"{% endif %}>{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        <button type="button" aria-label="More navigation links" aria-expanded="false" aria-controls="site-nav-more"><span class="navicon" aria-hidden="true"></span></button>
+        <ul id="site-nav-more" class="hidden-links hidden"></ul>
+      </nav>
+      <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Switch to light theme" title="Switch to light theme">
+        <i class="fas fa-sun theme-toggle__icon theme-toggle__icon--to-light" aria-hidden="true"></i>
+        <i class="fas fa-moon theme-toggle__icon theme-toggle__icon--to-dark" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>

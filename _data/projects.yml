@@ -1,0 +1,31 @@
+# Projects page entries, in display order (rendered by _includes/project-entry.html).
+# `publication` is the `key` of a _publications/ entry; its record and links are shown with the project.
+projects:
+  - title: "Privacy Evaluation of Vision-Language Models"
+    category: "Research project"
+    context: "Trustworthy AI Lab, The University of Alabama"
+    period: "2025–2026"
+    summary: "We investigated membership inference privacy risks in multimodal vision-language models, evaluating model behavior and privacy resilience through black-box experiments."
+    details:
+      - label: "Models studied"
+        text: "Including BLIP and PaliGemma 2"
+    publication: woot2026
+
+  - title: "Augmented Reality for Micro-Surgical Skill Training"
+    category: "Master's research project"
+    context: "University of Eastern Finland"
+    period: "2022"
+    summary: "I developed an augmented reality training prototype that uses computer vision for object detection and motion and path tracking, with tools for evaluating trainee performance."
+    details:
+      - label: "Technologies"
+        text: "Python, OpenCV, YOLOv5"
+    publication: msc-thesis
+
+  - title: "Junction Platform Engineering"
+    category: "Professional software engineering"
+    context: "Hack Junction, Finland"
+    period: "2023–2025"
+    summary: "As a full-stack developer on the Junction team, I contributed to web platform development, backend reliability, and product analytics."
+    details:
+      - label: "Technologies"
+        text: "React, Node.js, PostHog"

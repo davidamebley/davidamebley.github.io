@@ -1,0 +1,9 @@
+{% comment %}
+  Visible status note for unfinished pages.
+  Usage: {% include status-note.html label="Draft" text="Markdown text describing what will appear here." %}
+  `label` is usually "Draft" or "Coming soon".
+{% endcomment %}
+<aside class="status-note" aria-label="Page status">
+  <span class="status-label">{{ include.label | default: "Draft" }}</span>
+  {{ include.text | markdownify }}
+</aside>

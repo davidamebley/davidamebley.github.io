@@ -1,0 +1,55 @@
+# Teaching and learning activities, in the order they were completed
+# (rendered on /teaching/portfolio/ by _pages/teaching/portfolio.md).
+#
+# Only list an activity that was actually completed. Supporting material stays outside
+# this repository.
+#
+# Fields:
+#   id         Anchor for the entry on the page (lowercase, hyphenated)
+#   title      Activity name
+#   focus      What the activity examined or produced
+#   reflection Short first-person takeaway
+#   link       Optional related page, with `label` and `url`
+
+activities:
+  - id: engaged-teaching-inventory
+    title: "Engaged Teaching Inventory"
+    focus: "An informal self-assessment of my teaching style preferences."
+    reflection: "My highest preferences were Facilitator and Personal Model. I value guided practice, questions, and demonstrations that help students become more independent. The inventory also reminded me to balance guidance with the structure students need."
+
+  - id: teaching-philosophy-statement
+    title: "Teaching Philosophy Statement"
+    focus: "A first written statement of my teaching beliefs, centered on independent thinking, relatable analogies, student enjoyment and participation, and candid anonymous feedback."
+    reflection: "Writing an initial philosophy helped me articulate how encouragement, familiar examples, and student independence shape my teaching. I also identified honest feedback and self-reflection as ways to improve."
+    link: { label: "Read my teaching philosophy", url: "/teaching/philosophy/" }
+
+  - id: focused-autobiographical-sketch
+    title: "Focused Autobiographical Sketch"
+    focus: "Short reflective writing on how I learned to teach and how my pedagogical content knowledge (PCK) has developed."
+    reflection: "I learned to teach by observing others and adjusting my approach through experience. Looking back helped me see that developing pedagogical content knowledge is an ongoing process of practice, assessment, and reflection."
+
+  - id: personal-learning-environment
+    title: "Personal Learning Environment"
+    focus: "A map of the people, journals, conferences, books, and online teaching resources available for my continued development."
+    reflection: "Mapping people and resources I can learn from made professional growth more concrete. I want to keep learning from colleagues, teaching scholarship, and feedback from students."
+
+  - id: constructivist-inventory
+    title: "You Might Be a Constructivist If Inventory"
+    focus: "An informal self-assessment of how my views relate to major learning theories."
+    reflection: "My views aligned most closely with cognitivism, followed by humanism. This prompted me to think about how students process information and how individual needs affect learning. I do not see the inventory as a fixed label or a prescription for every lesson."
+
+  # One activity: the goals, objectives and outcomes draft and its Git lesson sketch.
+  - id: learning-goals-inventory
+    title: "Learning Goals Inventory"
+    focus: "A software engineering course goal with objectives and outcomes covering life-cycle models, UML, design patterns, secure development, and AI-supported techniques, along with a sketch of a Git version-control lesson."
+    reflection: "Drafting goals, objectives, and outcomes helped me connect what students should understand with what they should be able to demonstrate. The Git lesson sketch reinforced the value of linking explanations to practice."
+
+  - id: instructor-motivation-quiz
+    title: "Instructor Motivation Quiz"
+    focus: "An informal self-assessment of what motivates me to teach."
+    reflection: "Connection and influence stood out as motivations for teaching. The results reflect why relationships, encouragement, and the effect of my words on students matter to me."
+
+  - id: lecture-style-inventory
+    title: "Lecture Style Inventory"
+    focus: "An informal self-assessment of my lecture style preferences."
+    reflection: "Inspirer was my strongest preference. I recognize this in the way I try to make difficult topics feel approachable, including the spreadsheet lessons I taught in Ghana. I also want encouragement to be accompanied by clear explanations and checks for understanding."

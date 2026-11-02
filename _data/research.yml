@@ -1,0 +1,11 @@
+# Research themes: `short_title` on the home page, `title` on the Research page
+themes:
+  - title: "Human-Centered Computing and Human-AI Interaction"
+    short_title: "Human-Centered AI"
+    summary: "How people understand, trust, and make decisions about intelligent systems and the security technologies built into them."
+  - title: "Privacy, Usable Security, and Responsible AI"
+    short_title: "Privacy & Usable Security"
+    summary: "Why privacy and security protections are hard to adopt in practice, and how to make them usable for the people who build and rely on them."
+  - title: "Security and Privacy Evaluation of Intelligent Systems"
+    short_title: "AI Security & Evaluation"
+    summary: "Testing how machine learning models, including multimodal vision-language models, can reveal information about their training data."

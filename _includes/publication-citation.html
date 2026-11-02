@@ -1,0 +1,13 @@
+{% comment %}
+  Compact citation for the CV, rendered from a document in the _publications collection.
+  Usage: {% include publication-citation.html pub=pub %}
+{% endcomment %}
+{% assign pub = include.pub %}
+{% assign title_end = pub.title | slice: -1 %}
+<p class="citation">{% include publication-authors.html pub=pub %}. “{{ pub.title }}{% unless title_end == "?" or title_end == "!" %}.{% endunless %}” {% include publication-venue.html pub=pub citation=true %}
+  {%- if pub.links -%}
+  <span class="citation__links">
+    {%- for link in pub.links %} <a href="{{ link.url }}">{{ link.label }}<span class="visually-hidden">: {{ pub.title }}</span></a>{% endfor -%}
+  </span>
+  {%- endif -%}
+</p>

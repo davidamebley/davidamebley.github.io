@@ -1,0 +1,13 @@
+{% comment %}
+  Sub-navigation for the teaching section, driven by `teaching` in _data/navigation.yml.
+  Uses each section's short `nav_title`, falling back to its `title`.
+{% endcomment %}
+{% include base_path %}
+<nav class="section-nav" aria-label="Teaching portfolio">
+  <ul>
+    <li><a href="{{ base_path }}/teaching/"{% if page.url == "/teaching/" %} aria-current="page"{% endif %}>Overview</a></li>
+    {% for item in site.data.navigation.teaching %}
+      <li><a href="{{ base_path }}{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.nav_title | default: item.title }}</a></li>
+    {% endfor %}
+  </ul>
+</nav>

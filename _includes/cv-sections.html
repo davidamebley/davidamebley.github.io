@@ -1,0 +1,65 @@
+{% comment %}
+  CV sections, shared by the CV page (_pages/cv.md) and the PDF source page (_pages/cv-pdf.html).
+  Entries come from _data/cv.yml and publications from _publications/.
+{% endcomment %}
+{% assign cv = site.data.cv %}
+{% assign publications = site.publications | sort: "order" %}
+
+<section aria-labelledby="cv-education">
+  <h2 id="cv-education">Education</h2>
+  {% for entry in cv.education %}{% include cv-entry.html entry=entry %}{% endfor %}
+</section>
+
+<section aria-labelledby="cv-research">
+  <h2 id="cv-research">Research Experience</h2>
+  {% for entry in cv.research %}{% include cv-entry.html entry=entry %}{% endfor %}
+</section>
+
+<section aria-labelledby="cv-teaching">
+  <h2 id="cv-teaching">Teaching Experience</h2>
+  {% for entry in cv.teaching %}{% include cv-entry.html entry=entry %}{% endfor %}
+</section>
+
+<section aria-labelledby="cv-industry">
+  <h2 id="cv-industry">Industry Experience</h2>
+  {% for entry in cv.industry %}{% include cv-entry.html entry=entry %}{% endfor %}
+</section>
+
+<section aria-labelledby="cv-publications">
+  <h2 id="cv-publications">Publications</h2>
+  {% for category in site.publication_category %}
+    {% assign category_pubs = publications | where: "category", category[0] %}
+    {% if category_pubs.size > 0 %}
+    <h3 class="cv-subheading">{{ category[1].title }}</h3>
+    <ul class="citation-list">
+      {% for pub in category_pubs %}
+      <li>{% include publication-citation.html pub=pub %}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  {% endfor %}
+</section>
+
+<section aria-labelledby="cv-presentations">
+  <h2 id="cv-presentations">Presentations</h2>
+  {% for entry in cv.presentations %}{% include cv-entry.html entry=entry %}{% endfor %}
+</section>
+
+<section aria-labelledby="cv-honors">
+  <h2 id="cv-honors">Honors and Awards</h2>
+  {% for entry in cv.honors %}{% include cv-entry.html entry=entry %}{% endfor %}
+</section>
+
+<section aria-labelledby="cv-training">
+  <h2 id="cv-training">Certifications and Training</h2>
+  {% for entry in cv.training %}{% include cv-entry.html entry=entry %}{% endfor %}
+</section>
+
+<section aria-labelledby="cv-skills">
+  <h2 id="cv-skills">Technical Skills</h2>
+  <dl class="cv-skills">
+    {% for skill in cv.skills %}
+    <div><dt>{{ skill.category }}</dt><dd>{{ skill.items }}</dd></div>
+    {% endfor %}
+  </dl>
+</section>
